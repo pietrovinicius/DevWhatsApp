@@ -12,6 +12,7 @@ import {
     changeEmail,
     changePassword,
     changeName,
+    SignUpAction,
 } from './actions/AuthActions';
 
 export class SignUp extends Component {
@@ -32,7 +33,7 @@ export class SignUp extends Component {
     render() {
         return (
             <View style={styles.container}>
-            <Text>Nome: </Text>
+                <Text>Nome: </Text>
                 <TextInput style={styles.input}
                     value={this.props.name}
                     onChangeText={this.props.changeName} />
@@ -46,7 +47,9 @@ export class SignUp extends Component {
                     value={this.props.password}
                     onChangeText={this.props.changePassword}
                 />
-                <Button title="Cadastrar" />
+                <Button title="Cadastrar" onPress={() => {
+                    this.props.SignUpAction(this.props.name, this.props.email, this.props.password);
+                }} />
             </View>
         );
     }
@@ -61,7 +64,7 @@ const styles = StyleSheet.create({
     },
     input: {
         width: '80%',
-        fontSize:18,
+        fontSize: 18,
         height: 50,
         backgroundColor: '#DDDDDD',
     },
@@ -76,5 +79,11 @@ const mapStateToProps = (state) => {
     };
 };
 
-const SignUpConnect = connect(mapStateToProps, { checkLogin, changeName, changeEmail, changePassword })(SignUp);
+const SignUpConnect = connect(mapStateToProps, {
+    checkLogin,
+    changeName,
+    changeEmail,
+    changePassword,
+    SignUpAction
+})(SignUp);
 export default SignUpConnect;

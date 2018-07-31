@@ -1,7 +1,7 @@
 const initialState={
     name:'Nome',
     email:'e-mail@gmail.com.br',
-    password:'111111',
+    password:'',
     uid:'',
     status:0
 };
@@ -24,6 +24,10 @@ const AuthReducer = (state = initialState, action) => {
 
     if(action.type == 'changePassword'){
         return{...state, password:action.payload.password};
+    }
+
+    if(action.type == 'changeUid'){
+        return{...state, uid:action.payload.uid};
     }
     
     return state;
