@@ -1,5 +1,6 @@
 import firebase from '../FirebaseConnection';
 
+//minha action 
 export const checkLogin = () => {
     return(dispatch) => {
         let user = firebase.auth().currentUser;
@@ -17,7 +18,7 @@ export const checkLogin = () => {
             dispatch({
                 type:'changeStatus',
                 payload:{
-                    status:0
+                    status:2
                 }
             });
         }
