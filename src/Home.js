@@ -29,6 +29,7 @@ export class Home extends Component {
 
     siginButton() {
         console.log("################ siginButton!!!");
+        this.props.navigation.navigate('SignIn');
     }
 
     sigupButton() {
