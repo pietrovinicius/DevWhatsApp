@@ -5,6 +5,7 @@ import {
     StyleSheet,
     Button,
     TextInput,
+    Keyboard,
 } from 'react-native';
 import { connect } from 'react-redux';
 import {
@@ -28,6 +29,15 @@ export class SignUp extends Component {
 
     componentDidMount() {
         console.log(`################ SignUp / Cadastrar`);
+    }
+
+    componentDidUpdate() {
+        console.log(`usuario: ${this.props.uid}\nstatus:${this.props.status}`);
+        if (this.props.status == 1) {
+            //Para fechar o teclado antes de mudar de tela
+            Keyboard.dismiss();
+            this.props.navigation.navigate('Conversas');
+        }
     }
 
     render() {

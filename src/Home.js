@@ -27,6 +27,8 @@ export class Home extends Component {
         console.log(`################ Home - props status: ${this.props.status}`);
     }
 
+    componentDidUpdate(){}
+
     siginButton() {
         console.log("################ siginButton!!!");
         this.props.navigation.navigate('SignIn');

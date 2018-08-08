@@ -5,6 +5,7 @@ import {
     StyleSheet,
     Button,
     TextInput,
+    Keyboard,
 } from 'react-native';
 import { connect } from 'react-redux';
 import {
@@ -27,13 +28,24 @@ export class SignIn extends Component {
     }
 
     componentDidMount() {
-        console.log(`################ SignUp / Cadastrar`);
+        console.log(`################ SignIn / Login`);
+    }
+
+    componentDidUpdate() {
+        console.log(`usuario: ${this.props.uid}\nstatus:${this.props.status}`);
+        if (this.props.status == 1) {
+            //Para fechar o teclado antes de mudar de tela
+            Keyboard.dismiss();
+            this.props.navigation.navigate('Conversas');
+        }
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <Text>Usuário logado: {this.props.uid}</Text>
+                
+                <Text>uid: {this.props.uid} </Text>
+                <Text>status: {this.props.status} </Text>
                 <Text>Email: </Text>
                 <TextInput style={styles.input}
                     value={this.props.email}
@@ -72,6 +84,7 @@ const mapStateToProps = (state) => {
         uid: state.auth.uid,
         email: state.auth.email,
         password: state.auth.password,
+        status: state.auth.status
     };
 };
 

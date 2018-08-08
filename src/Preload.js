@@ -20,6 +20,7 @@ export class Preload extends Component {
         this.state = {};
         //bind
         this.directPages = this.directPages.bind(this);
+        //a primeira coisa a fazer é o check login
         this.props.checkLogin();
     }
 
@@ -66,8 +67,7 @@ export class Preload extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        margin: 10
+    container: {        
     }
 });
 

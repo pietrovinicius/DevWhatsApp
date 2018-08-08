@@ -22,7 +22,8 @@ const Navegador = StackNavigator({
     screen:Home
   },
   Conversas:{
-    screen:Conversas
+    screen:Conversas,
+    navigationOptions: { header: null }
   },
   SignIn:{
     screen:SignIn

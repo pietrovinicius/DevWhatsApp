@@ -1,50 +1,25 @@
 import React, { Component } from 'react';
-import{
-    View,
-    Text,
-    StyleSheet,
-} from 'react-native';
-import{ connect } from 'react-redux';
-import{ checkLogin } from './actions/AuthActions';
+import { TabNavigator } from 'react-navigation';
+import { connect } from 'react-redux';
+import ConversasList from './ConversasList';
+import ContatoList from './ContatoList';
+import Config from './Config';
 
-export class Conversas extends Component{
 
-    static navigationOptions = {
-        title:'Home',
-        header:null
+const ConversasNavigator = TabNavigator ({
+    ConversasList:{
+        screen: ConversasList
+    },
+    ContatoList:{
+        screen: ContatoList
+    },
+    Config:{
+        screen: Config
     }
-
-    constructor(props){
-        super(props);
-        this.state={};
-
-    }
-
-    componentDidMount(){
-        console.log(`################ Conversas - props status: ${this.props.status}`);
-    }
-    
-
-    render(){
-        return(
-            <View style={styles.container}>
-                <Text>Página Conversas</Text>
-            </View>
-        );
-    }
-}
-
-const styles = StyleSheet.create({
-    container:{
-        margin:10
-    }
+}, {
+    tabBarPosition: 'bottom',
+    animationEnabled: 'false',
+    swipeEnabled: 'false'
 });
 
-const mapStateToProps = (state) => {
-    return {
-        status:state.auth.status
-    };
-};
-
-const ConversasConnect = connect(mapStateToProps, { checkLogin })(Conversas);
-export default ConversasConnect;
+export default ConversasNavigator;

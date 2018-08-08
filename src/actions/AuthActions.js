@@ -2,26 +2,28 @@ import firebase from '../FirebaseConnection';
 
 //minha action 
 export const checkLogin = () => {
-    return (dispatch) => {
-        let user = firebase.auth().currentUser;
 
-        if (user) {
-            //usuário está logado
-            dispatch({
-                type: 'changeStatus',
-                payload: {
-                    status: 1
-                }
-            });
-        } else {
-            //usuário não está logado
-            dispatch({
-                type: 'changeStatus',
-                payload: {
-                    status: 2
-                }
-            });
-        }
+    return (dispatch) => {
+
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                //usuário está logado
+                dispatch({
+                    type: 'changeUid',
+                    payload: {
+                        uid: user.uid
+                    }
+                });
+            } else {
+                //usuário não está logado
+                dispatch({
+                    type: 'changeStatus',
+                    payload: {
+                        status: 2
+                    }
+                });
+            }
+        });
     }
 };
 
@@ -97,7 +99,7 @@ export const SignInAction = (email, password) => {
             .then((user) => {
                 //pegar usuário que foi criado
                 let uid = firebase.auth().currentUser.uid;
-                
+
                 //salvando no redurcer
                 dispatch({
                     type: 'changeUid',
