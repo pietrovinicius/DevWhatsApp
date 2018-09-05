@@ -3,8 +3,11 @@ import {
     View,
     Text,
     StyleSheet,
+    Button,
 } from 'react-native';
+import { navigationOptions } from 'react-navigation';
 import { connect } from 'react-redux';
+import { SignOut } from './actions/AuthActions';
 
 export class ContatoList extends Component {
 
@@ -18,6 +21,8 @@ export class ContatoList extends Component {
         super(props);
         this.state = {};
 
+        this.sair = this.sair.bind(this);
+
     }
 
     componentDidMount() {
@@ -25,12 +30,23 @@ export class ContatoList extends Component {
     }
 
     componentDidUpdate() { }
-
+    
+    sair(){
+        this.props.SignOut();
+        //navigation que direciona pra home depois que o usuário é deslogado
+        this.props.navigation.dispatch(NavigationActions.reset({
+            index:0,
+            actions:[
+                NavigationActions.navigate({routeName:'Home'})
+            ]
+        }));
+    }
 
     render() {
         return (
             <View style={styles.container}>
-                <Text>Página de Config</Text>                
+                <Text>Página de Config</Text>
+                <Button title="Sair" onPress={this.sair} />                
             </View>
         );
     }
@@ -49,5 +65,5 @@ const mapStateToProps = (state) => {
     };
 };
 
-const ContatoListConnect = connect(mapStateToProps, {})(ContatoList);
+const ContatoListConnect = connect(mapStateToProps, { SignOut })(ContatoList);
 export default ContatoListConnect;

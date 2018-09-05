@@ -3,8 +3,10 @@ import {
     View,
     Text,
     StyleSheet,
+    FlatList,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { getContactList } from './actions/ChatActions';
 
 export class ContatoList extends Component {
 
@@ -17,6 +19,7 @@ export class ContatoList extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.props.getContactList();
 
     }
 
@@ -30,7 +33,16 @@ export class ContatoList extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Página de Contato</Text>                
+                <FlatList              
+                    data={this.props.contacts}
+                    renderItem={ (item) => {
+                        return (
+                            <View>
+                                <Text>-> {item.name}</Text>
+                            </View>
+                        );
+                    }}
+                />
             </View>
         );
     }
@@ -43,11 +55,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-    return {
-        status: state.auth.status,
-        uid: state.auth.uid
+    return {      
+        uid: state.auth.uid,
+        contacts: state.chat.contacts
     };
 };
 
-const ContatoListConnect = connect(mapStateToProps, {})(ContatoList);
+const ContatoListConnect = connect(mapStateToProps, { getContactList })(ContatoList);
 export default ContatoListConnect;
